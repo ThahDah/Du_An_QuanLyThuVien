@@ -49,8 +49,23 @@ public class Sach {
 																(trangThai)? "đã được mượn" :"chưa được mượn");
 	}
 
-
+	public String toFileString() {
+		return maSach + ";" + tenSach + ";" + tacGia + ";" + trangThai;
+	}
 	
-	
-	
+	public static Sach fromFileString(String fileLine) {
+        try {
+            String[] parts = fileLine.split(";");
+            if (parts.length == 4) {
+                String ma = parts[0];
+                String ten = parts[1];
+                String tacGia = parts[2];
+                boolean trangThaiMuon = Boolean.parseBoolean(parts[3]);
+                return new Sach(ma, ten, tacGia, trangThaiMuon);
+            }
+        } catch (Exception e) {
+            System.err.println("Lỗi khi đọc dòng dữ liệu sách: " + fileLine);
+        }
+        return null;
+	}
 }

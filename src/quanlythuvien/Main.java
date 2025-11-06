@@ -1,28 +1,40 @@
 package quanlythuvien;
 
+
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
+	private static final String FILE_SACH = "Sach.txt";
+	private static final String FILE_TV = "ThanhVien.txt";
+	private static ThuVien myLibrary  = new ThuVien();
+	private static Scanner sc = new Scanner(System.in);
 	
-	public static void main(String[] args) {
-		ThuVien myLibrary  = new ThuVien();
-		Scanner sc = new Scanner(System.in);
-		
-		Sach s01 = new Sach("KH01", "Vật lý lượng tử","Newton", false);
-		Sach s02 = new Sach("KH02", "Cấu trúc rời rạc","Ainstein", false);
-		Sach s03 = new Sach("KH03", "Cấu trúc dữ liệu","Lyori", false);
-		
-		ThanhVien tv1 =  new ThanhVien("TV01","Lê Thành Danh");
-		ThanhVien tv2 =  new ThanhVien("TV02","Lê Thành Đạt");
-		ThanhVien tv3 =  new ThanhVien("TV03","Nguyễn Thành An");
-		
-		myLibrary.themSach(s01);
-		myLibrary.themSach(s02);
-		myLibrary.themSach(s03);
-		
-		myLibrary.themThanhVien(tv1);
-		myLibrary.themThanhVien(tv2);
-		myLibrary.themThanhVien(tv3);
+	public static void main(String[] args) throws IOException {
+
+//		Sach s01 = new Sach("KH01", "Vật lý lượng tử","Newton", false);
+//		Sach s02 = new Sach("KH02", "Cấu trúc rời rạc","Ainstein", false);
+//		Sach s03 = new Sach("KH03", "Cấu trúc dữ liệu","Lyori", false);
+//		
+//
+//		
+//		ThanhVien tv1 =  new ThanhVien("TV01","Lê Thành Danh");
+//		ThanhVien tv2 =  new ThanhVien("TV02","Lê Thành Đạt");
+//		ThanhVien tv3 =  new ThanhVien("TV03","Nguyễn Thành An");
+//		
+//		
+//		myLibrary.themSach(s01);
+//		myLibrary.themSach(s02);
+//		myLibrary.themSach(s03);
+//		
+//		myLibrary.themThanhVien(tv1);
+//		myLibrary.themThanhVien(tv2);
+//		myLibrary.themThanhVien(tv3);
 		
 		
 		
@@ -40,16 +52,18 @@ public class Main {
 //		
 //		System.out.println("Thông tin của cuốn sách 'Vật lý lượng tử' là: ");
 //		System.out.println(dsSach.timSach("Vật lý lượng tử"));
+		loadTatCaDuLieu();
 		
 		int option;
 		do {
 			System.out.println();
 			System.out.println("==============MENU==============");
 			System.out.println("1.Thêm sách");
-			System.out.println("2.Mượn sách");
-			System.out.println("3.Trả sách");
-			System.out.println("4.Danh sách sách trong thư viện");
-			System.out.println("5.Danh sách thành viên của thư viện");
+			System.out.println("2.Thêm thành viên");
+			System.out.println("3.Mượn sách");
+			System.out.println("4.Trả sách");
+			System.out.println("5.Danh sách sách trong thư viện");
+			System.out.println("6.Danh sách thành viên của thư viện");
 			System.out.println("0.Thoát");
 			System.out.println("================================");
 			System.out.println();
@@ -68,6 +82,14 @@ public class Main {
 					myLibrary.themSach(s);
 					break;
 				case 2:
+					System.out.println("Mời bạn nhập mã thành viên: ");
+					String maTv = sc.nextLine();
+					System.out.println("Mời bạn nhập tên thành viên: ");
+					String tenTv = sc.nextLine();
+					ThanhVien tv  =  new ThanhVien(maTv, tenTv);
+					myLibrary.themThanhVien(tv);
+					break;
+				case 3:
 					System.out.println("Mời bạn nhập mã thành viên:");
 					String maTV = sc.nextLine();
 					System.out.println("Mời bạn nhập tên sách cần mượn:");
@@ -76,7 +98,7 @@ public class Main {
 						System.out.println("MƯỢN SÁCH THÀNH CÔNG!!!");
 					} else System.out.println("MƯỢN SÁCH KHÔNG THÀNH CÔNG!!!");
 					break;
-				case 3:
+				case 4:
 					System.out.println("Mời bạn nhập mã thành viên: ");
 					String maTV1 = sc.nextLine();
 					System.out.println("Mời bạn nhập tên sách cần trả: ");
@@ -85,23 +107,80 @@ public class Main {
 						System.out.println("TRẢ SÁCH THÀNH CÔNG");
 					} else System.out.println("TRẢ SÁCH KHÔNG THÀNH CÔNG");
 					break;
-				case 4:
+				case 5:
 					System.out.println("---DANH SÁCH SÁCH CÓ TRONG THƯ VIỆN---");
 					System.out.printf("| %5s | %20s | %10s | %15s |\n","Mã","Tên sách","Tác giả","Trạng thái");
 					myLibrary.xuatDSSTV();
 					break;
-				case 5:
+				case 6:
 					System.out.println("---DANH SÁCH THÀNH VIÊN CỦA THƯ VIỆN---");
 					System.out.printf("| %5s | %20s | %30s |\n","Mã","Tên thành viên","Danh sách sách đã mượn");
 					myLibrary.xuatDSTV();
 					break;
 				case 0: 
+					saveTatCaDuLieu();
 					System.out.println("Đã thoát");
 					break;
 			}
 
 		}while(option != 0);
-
+		sc.close();
 	}
+	
+	private static void loadTatCaDuLieu() {
+		
+		try(BufferedReader brSach = new BufferedReader(new FileReader(FILE_SACH))) {
+			String line = "";
+			while((line = brSach.readLine()) != null)
+			{
+				Sach s = Sach.fromFileString(line);
+				myLibrary.themSach(s);
+			}
+		} catch (IOException e) {
+		}
+		
+		try (BufferedReader brTV = new BufferedReader(new FileReader(FILE_TV))) {
+            String line;
+            while ((line = brTV.readLine()) != null) {
+                ThanhVien tv = ThanhVien.fromFileString(line);
+                if (tv != null) {
+                    myLibrary.themThanhVien(tv);
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Không tìm thấy file " + FILE_TV + ". Sẽ tạo file mới khi thoát.");
+        }	
+	}
+	
+	private static void saveTatCaDuLieu() {
+        
+        try (BufferedWriter bwSach = new BufferedWriter(new FileWriter(FILE_SACH, false))) {
+            for (Sach s : myLibrary.getDsSach().values()) {
+                bwSach.write(s.toFileString());
+                bwSach.newLine(); 
+            }
+        } catch (IOException e) {
+            System.err.println("Lỗi khi lưu file sách: " + e.getMessage());
+        }
+
+        
+        try (BufferedWriter bwTV = new BufferedWriter(new FileWriter(FILE_TV, false))) {
+            for (ThanhVien tv : myLibrary.getDsThanhVien().values()) {
+                bwTV.write(tv.toFileString());
+                bwTV.newLine();
+            }
+        } catch (IOException e) {
+            System.err.println("Lỗi khi lưu file thành viên: " + e.getMessage());
+        }
+        int cnt = 0;
+        for(Sach s : myLibrary.getDsSach().values())
+        {
+        	if(!s.isTrangThai()) {
+        		cnt++;
+        	}
+        }
+        System.out.println("Số sách đang có trong thư viện: " + cnt +" quyển\n"
+        					+"Số thành viên của thư viện: " + myLibrary.getDsThanhVien().size() +" người");
+    }
 	
 }

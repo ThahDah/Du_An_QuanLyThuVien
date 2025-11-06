@@ -2,7 +2,7 @@ package quanlythuvien;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+
 
 public class ThanhVien {
 	private String maTV;
@@ -14,8 +14,8 @@ public class ThanhVien {
 	public List<String> getDsSachDaMuon() {
 		return dsSachDaMuon;
 	}
-	public void setDsSachDaMuon(Sach sachDaMuon) {
-		this.dsSachDaMuon.add(sachDaMuon.getTenSach());
+	public void setDsSachDaMuon(String sachDaMuon) {
+		this.dsSachDaMuon.add(sachDaMuon);
 	}
 	
 	public ThanhVien(String maTV, String tenTV) {
@@ -38,22 +38,21 @@ public class ThanhVien {
 	public String toString() {
 		return String.format("| %5s | %20s | %30s |",maTV,tenTV,dsSachDaMuon);
 	}
-	@Override
-	public int hashCode() {
-		return Objects.hash(maTV);
-	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		ThanhVien other = (ThanhVien) obj;
-		return Objects.equals(maTV, other.maTV);
+	
+	public String toFileString() {
+		return maTV + ";" + tenTV + ";" + dsSachDaMuon;
 	}
 	
-	
+	public static ThanhVien fromFileString(String fileLine) {
+	    try {
+            String[] parts = fileLine.split(";");
+             if (parts.length >= 2) {
+                return new ThanhVien(parts[0], parts[1]);
+            }
+        } catch (Exception e) {
+            System.err.println("Lỗi khi đọc dòng dữ liệu thành viên: " + fileLine);
+        }
+        return null;
+	}
 	
 }

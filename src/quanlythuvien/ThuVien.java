@@ -12,25 +12,34 @@ public class ThuVien {
 	private TreeMap<String,Sach> dsSach;
 	private TreeMap<String,ThanhVien> dsTV;
 	
+	
 	public ThuVien() {
 		this.dsSach = new TreeMap<String, Sach>();
 		this.dsTV = new TreeMap<String, ThanhVien>();
 	}
 	
 	public void themSach(Sach sach) {
-		if(sach != null && !dsSach.containsKey(sach.getMaSach())) {
+		if(sach == null) {
+			return;
+		}
+		
+		if(!dsSach.containsKey(sach.getMaSach())) {
 			dsSach.put(sach.getMaSach(), sach);
-			System.out.println("Đã thêm sách " + sach.getTenSach() + " vào thư viện");
-		} else System.out.println("Trùng mã sách");
+			System.out.println("*Đã thêm sách " + sach.getTenSach() + " vào thư viện");
+		} else System.out.println("*Trùng mã sách");
 	}
 	
 	
 	
 	public void themThanhVien(ThanhVien tv) {
-		if(tv != null && !dsTV.containsKey(tv.getMaTV())) {
+		if(tv == null) {
+			return;
+		}
+		
+		if(!dsTV.containsKey(tv.getMaTV())) {
 			dsTV.put(tv.getMaTV(), tv);
-			System.out.println("Đã thêm  "+ tv.getTenTV() + " vào danh sách" );
-		}else System.out.println("Trùng mã thành viên");
+			System.out.println("*Đã thêm  "+ tv.getTenTV() + " vào danh sách" );
+		}else System.out.println("*Trùng mã thành viên");
 		
 	}
 
@@ -67,27 +76,35 @@ public class ThuVien {
 		}
 	}
 	
+	  public Map<String, ThanhVien> getDsThanhVien() {
+	        return dsTV;
+	    }
+	  
+	  public Map<String, Sach> getDsSach() {
+	        return dsSach;
+	    }
+	
 	public boolean muonSach(String maTV, String tenSach) {
 		ThanhVien tv = timThanhVien(maTV);
 		Sach sach = timSach(tenSach);
 		
 		if(tv == null) {
-			System.out.println("Không tìm thấy thành viên có mã: "+ maTV);
+			System.out.println("*Không tìm thấy thành viên có mã: "+ maTV);
 			return false;
 		}
 		
 		if(sach == null) {
-			System.out.println("Không tìm thấy sách: " + tenSach);
+			System.out.println("*Không tìm thấy sách: " + tenSach);
 			return false;
 		}
 		
 		if(sach.isTrangThai()) {
-			System.out.println("Sách đã được mượn");
+			System.out.println("*Sách đã được mượn");
 			return false;
 		}
 		
 		sach.setTrangThai(true);
-		tv.setDsSachDaMuon(sach);
+		tv.setDsSachDaMuon(sach.getTenSach());
 		return true;
 	}
 	
@@ -96,17 +113,17 @@ public class ThuVien {
 		Sach sach = timSach(tenSach);
 		
 		if(tv == null) {
-			System.out.println("Không tìm thấy thành viên có mã: "+ maTV);
+			System.out.println("*Không tìm thấy thành viên có mã: "+ maTV);
 			return false;
 		}
 		
 		if(sach == null) {
-			System.out.println("Không tìm thấy sách: " + tenSach);
+			System.out.println("*Không tìm thấy sách: " + tenSach);
 			return false;
 		}
 		
 		if(!sach.isTrangThai()) {
-			System.out.println("Sách đã được trả");
+			System.out.println("*Sách đã được trả");
 			return false;
 		}
 		
