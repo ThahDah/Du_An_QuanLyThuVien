@@ -9,49 +9,18 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+import javax.swing.JFrame;
+	
+
 public class Main {
 	private static final String FILE_SACH = "Sach.txt";
 	private static final String FILE_TV = "ThanhVien.txt";
 	private static ThuVien myLibrary  = new ThuVien();
 	private static Scanner sc = new Scanner(System.in);
 	
+	
 	public static void main(String[] args) throws IOException {
-
-//		Sach s01 = new Sach("KH01", "Vật lý lượng tử","Newton", false);
-//		Sach s02 = new Sach("KH02", "Cấu trúc rời rạc","Ainstein", false);
-//		Sach s03 = new Sach("KH03", "Cấu trúc dữ liệu","Lyori", false);
-//		
-//
-//		
-//		ThanhVien tv1 =  new ThanhVien("TV01","Lê Thành Danh");
-//		ThanhVien tv2 =  new ThanhVien("TV02","Lê Thành Đạt");
-//		ThanhVien tv3 =  new ThanhVien("TV03","Nguyễn Thành An");
-//		
-//		
-//		myLibrary.themSach(s01);
-//		myLibrary.themSach(s02);
-//		myLibrary.themSach(s03);
-//		
-//		myLibrary.themThanhVien(tv1);
-//		myLibrary.themThanhVien(tv2);
-//		myLibrary.themThanhVien(tv3);
 		
-		
-		
-//		System.out.println("Danh sách sách trong thư viên: ");
-//		System.out.printf("| %5s | %20s | %10s | %15s |\n","Mã","Tên sách","Tác giả","Trạng thái");
-//		dsSach.getDsSach().forEach(sach-> System.out.println(sach));
-//		System.out.println();
-//		
-//		System.out.println("Danh sách thành viên của thư viện: ");
-//		System.out.printf("| %5s | %20s | %30s |\n","Mã","Tên thành viên","Danh sách sách đã mượn");
-//		dsTv.getDsTv().forEach(sach-> System.out.println(sach));
-//		System.out.println();
-//		
-//		
-//		
-//		System.out.println("Thông tin của cuốn sách 'Vật lý lượng tử' là: ");
-//		System.out.println(dsSach.timSach("Vật lý lượng tử"));
 		loadTatCaDuLieu();
 		
 		int option;

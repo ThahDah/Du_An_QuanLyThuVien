@@ -1,5 +1,6 @@
 package quanlythuvien;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,12 +16,16 @@ public class ThanhVien {
 		return dsSachDaMuon;
 	}
 	public void setDsSachDaMuon(String sachDaMuon) {
-		this.dsSachDaMuon.add(sachDaMuon);
+		if(sachDaMuon!= "" && !sachDaMuon.contains("[]")) {
+			this.dsSachDaMuon.add(sachDaMuon);
+		}
+		
 	}
 	
 	public ThanhVien(String maTV, String tenTV) {
 		this.maTV = maTV;
 		this.tenTV = tenTV;
+		
 	}
 	public String getMaTV() {
 		return maTV;
@@ -43,9 +48,11 @@ public class ThanhVien {
 		return maTV + ";" + tenTV + ";" + dsSachDaMuon;
 	}
 	
+	
 	public static ThanhVien fromFileString(String fileLine) {
-	    try {
+	    try{
             String[] parts = fileLine.split(";");
+        
              if (parts.length >= 2) {
                 return new ThanhVien(parts[0], parts[1]);
             }
