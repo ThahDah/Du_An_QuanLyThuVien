@@ -1,6 +1,6 @@
-package quanlythuvien;
+package view;
 
-import java.awt.EventQueue;
+
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -14,7 +14,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 
-public class AddMemberFrame extends JFrame {
+public class AddMemberGUI extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -27,10 +27,12 @@ public class AddMemberFrame extends JFrame {
 	private JLabel lblNewLabel;
 
 
-	public AddMemberFrame(Menu m) {
-		setVisible(true);
+	public AddMemberGUI(LibraryGUI m) {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setTitle("LibraryManager");
+		setSize(477, 361);
+		setLocationRelativeTo(null);
+		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -43,7 +45,7 @@ public class AddMemberFrame extends JFrame {
 		JButton addMemberButton = new JButton("Add");
 		addMemberButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(AddMemberFrame.this,"Đã thêm thành công");
+				JOptionPane.showMessageDialog(AddMemberGUI.this,"Đã thêm thành công");
 				idField.setText("");
 				nameField.setText("");
 				birthField.setText("");
@@ -83,7 +85,7 @@ public class AddMemberFrame extends JFrame {
 				dispose();
 			}
 		});
-		backButton.setBounds(338, 230, 88, 22);
+		backButton.setBounds(365, 291, 88, 22);
 		contentPane.add(backButton);
 		
 		idLable = new JLabel("Mã thành viên: ");

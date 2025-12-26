@@ -1,4 +1,4 @@
-package quanlythuvien;
+package test;
 
 
 
@@ -9,7 +9,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-import javax.swing.JFrame;
+import model.Sach;
+import model.ThanhVien;
+import model.ThuVien;
 	
 
 public class Main {

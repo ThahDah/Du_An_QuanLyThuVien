@@ -1,22 +1,17 @@
-package quanlythuvien;
-
-import java.awt.EventQueue;
+package view;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.border.LineBorder;
-import java.awt.Color;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 
-public class AddBookFrame extends JFrame {
+public class AddBookGUI extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -31,10 +26,13 @@ public class AddBookFrame extends JFrame {
 	private JTextField dateField;
 	private JLabel lblNewLabel_1;
 
-	 	AddBookFrame(Menu m) {
+	 	public AddBookGUI(LibraryGUI m) {
 	 	setVisible(true);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setTitle("LibraryManager");
+		setSize(477, 361);
+		setLocationRelativeTo(null);
+		
 		contentPane = new JPanel();
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -48,7 +46,7 @@ public class AddBookFrame extends JFrame {
 		JButton addButton = new JButton("Add");
 		addButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(AddBookFrame.this,"Đã thêm thành công!");
+				JOptionPane.showMessageDialog(AddBookGUI.this,"Đã thêm thành công!");
 				idField.setText("");
 				nameField.setText("");
 				authorField.setText("");
@@ -65,7 +63,7 @@ public class AddBookFrame extends JFrame {
 				dispose();
 			}
 		});
-		returnButton.setBounds(338, 230, 88, 22);
+		returnButton.setBounds(365, 291, 88, 22);
 		contentPane.add(returnButton);
 		
 		lblNewLabel = new JLabel("Mã sách:");
